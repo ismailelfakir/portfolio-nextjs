@@ -202,7 +202,7 @@ export function ProjectsSection() {
                     </CardContent>
                     <CardFooter className="p-6 pt-0 flex justify-between">
                       {project.links.github && (
-                        <Button variant="ghost\" size="sm\" asChild>
+                        <Button variant="ghost" size="sm" asChild>
                           <a 
                             href={project.links.github} 
                             target="_blank" 
