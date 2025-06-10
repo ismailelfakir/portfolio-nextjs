@@ -9,24 +9,24 @@ import Footer from '@/components/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'John Doe | Frontend Developer Portfolio',
-  description: 'Personal portfolio showcasing projects and skills in web development',
-  keywords: ['frontend developer', 'web developer', 'portfolio', 'projects', 'React', 'Next.js'],
-  authors: [{ name: 'John Doe' }],
-  creator: 'John Doe',
+  title: 'Ismail El Fakir | Full Stack Developer Portfolio',
+  description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
+  keywords: ['full stack developer', 'web developer', 'portfolio', 'projects', 'React', 'Next.js', 'digital transformation', 'skills engineering'],
+  authors: [{ name: 'Ismail El Fakir' }],
+  creator: 'Ismail El Fakir',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://johndoe-portfolio.com',
-    title: 'John Doe | Frontend Developer Portfolio',
-    description: 'Personal portfolio showcasing projects and skills in web development',
-    siteName: 'John Doe Portfolio',
+    url: 'https://ismailelfakir-portfolio.com',
+    title: 'Ismail El Fakir | Full Stack Developer Portfolio',
+    description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
+    siteName: 'Ismail El Fakir Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'John Doe | Frontend Developer Portfolio',
-    description: 'Personal portfolio showcasing projects and skills in web development',
-    creator: '@johndoe',
+    title: 'Ismail El Fakir | Full Stack Developer Portfolio',
+    description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
+    creator: '@ismailelfakir',
   },
 };
 
