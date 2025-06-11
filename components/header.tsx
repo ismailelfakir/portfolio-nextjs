@@ -7,22 +7,11 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
-];
+import { getPersonalInfo, getNavigation } from "@/lib/config";
 
 export default function Header() {
+  const personal = getPersonalInfo();
+  const navItems = getNavigation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -68,12 +57,12 @@ export default function Header() {
             className="relative w-10 h-10 rounded-full overflow-hidden"
           >
             <img 
-              src="/image.png" 
-              alt="Ismail El Fakir" 
+              src={personal.profileImage} 
+              alt={personal.name} 
               className="w-full h-full object-cover"
             />
           </motion.div>
-          <span className="text-lg font-semibold">Ismail El Fakir</span>
+          <span className="text-lg font-semibold">{personal.name}</span>
         </Link>
 
         {/* Desktop Navigation */}

@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { AtSign, MapPin, Phone, Send, Loader2 } from "lucide-react";
+import { getContactInfo, getPersonalInfo } from "@/lib/config";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -23,7 +24,10 @@ const contactFormSchema = z.object({
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export function ContactSection() {
+  const contactInfo = getContactInfo();
+  const personal = getPersonalInfo();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -54,11 +58,10 @@ export function ContactSection() {
           viewport={{ once: true }}
           className="flex flex-col items-center justify-center text-center mb-12"
         >
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get In Touch</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">{contactInfo.title}</h2>
           <Separator className="w-24 h-1 bg-primary mt-4 mb-8" />
           <p className="max-w-[800px] text-muted-foreground md:text-lg">
-            Have a question or want to work together? Feel free to reach out.
-            I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+            {contactInfo.description}
           </p>
         </motion.div>
 
@@ -82,7 +85,7 @@ export function ContactSection() {
                 <AtSign className="h-6 w-6 text-primary mt-0.5" />
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <p className="text-muted-foreground">hello@johndoe.com</p>
+                  <p className="text-muted-foreground">{personal.email}</p>
                 </div>
               </div>
               
@@ -90,7 +93,7 @@ export function ContactSection() {
                 <Phone className="h-6 w-6 text-primary mt-0.5" />
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground">{personal.phone}</p>
                 </div>
               </div>
               
@@ -98,7 +101,7 @@ export function ContactSection() {
                 <MapPin className="h-6 w-6 text-primary mt-0.5" />
                 <div>
                   <h4 className="font-medium">Location</h4>
-                  <p className="text-muted-foreground">New York City, NY</p>
+                  <p className="text-muted-foreground">{personal.location}</p>
                 </div>
               </div>
             </div>
@@ -107,16 +110,16 @@ export function ContactSection() {
               <h4 className="font-medium mb-2">Office Hours</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>9:00 AM - 5:00 PM EST</span>
+                  <span>{contactInfo.officeHours.weekdays}</span>
+                  <span>{contactInfo.officeHours.weekdaysTime}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>By appointment</span>
+                  <span>{contactInfo.officeHours.saturday}</span>
+                  <span>{contactInfo.officeHours.saturdayTime}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span>Closed</span>
+                  <span>{contactInfo.officeHours.sunday}</span>
+                  <span>{contactInfo.officeHours.sundayTime}</span>
                 </div>
               </div>
             </div>

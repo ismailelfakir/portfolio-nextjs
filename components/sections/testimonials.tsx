@@ -14,18 +14,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-
-interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  content: string;
-  rating: number;
-  image?: string;
-  isUserSubmitted?: boolean;
-  createdAt: string;
-}
+import { getTestimonials, type Testimonial } from "@/lib/config";
 
 const testimonialSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -37,64 +26,6 @@ const testimonialSchema = z.object({
 
 type TestimonialFormValues = z.infer<typeof testimonialSchema>;
 
-// Hardcoded testimonials data
-const defaultTestimonials: Testimonial[] = [
-  {
-    id: "1",
-    name: "Sarah Johnson",
-    role: "Product Manager",
-    company: "TechCorp Inc.",
-    content: "Ismail delivered exceptional work on our e-commerce platform. His attention to detail and technical expertise made the project a huge success. The dashboard he built has significantly improved our operational efficiency.",
-    rating: 5,
-    createdAt: "2024-01-15"
-  },
-  {
-    id: "2",
-    name: "Michael Chen",
-    role: "CTO",
-    company: "StartupXYZ",
-    content: "Working with Ismail was a game-changer for our startup. He transformed our ideas into a beautiful, functional web application that exceeded our expectations. His communication throughout the project was outstanding.",
-    rating: 5,
-    createdAt: "2024-02-08"
-  },
-  {
-    id: "3",
-    name: "Emily Rodriguez",
-    role: "Design Lead",
-    company: "Creative Agency",
-    content: "Ismail's ability to translate design concepts into pixel-perfect code is remarkable. He collaborated seamlessly with our design team and delivered a responsive website that looks amazing on all devices.",
-    rating: 5,
-    createdAt: "2024-02-20"
-  },
-  {
-    id: "4",
-    name: "David Thompson",
-    role: "Founder",
-    company: "FinTech Solutions",
-    content: "The financial dashboard Ismail built for us is incredibly robust and user-friendly. His expertise in both frontend and backend development was evident throughout the project. Highly recommended!",
-    rating: 5,
-    createdAt: "2024-03-05"
-  },
-  {
-    id: "5",
-    name: "Lisa Wang",
-    role: "Marketing Director",
-    company: "Digital Marketing Pro",
-    content: "Ismail created a stunning portfolio website that perfectly showcases our work. The site is fast, SEO-optimized, and has helped us attract new clients. His professionalism is top-notch.",
-    rating: 5,
-    createdAt: "2024-03-18"
-  },
-  {
-    id: "6",
-    name: "James Wilson",
-    role: "Operations Manager",
-    company: "LogiFlow",
-    content: "The mobile app Ismail developed for our logistics company has streamlined our operations significantly. His understanding of our business needs and technical implementation was impressive.",
-    rating: 4,
-    createdAt: "2024-04-02"
-  }
-];
-
 // Function to shuffle array and get random items
 const getRandomTestimonials = (testimonials: Testimonial[], count: number): Testimonial[] => {
   const shuffled = [...testimonials].sort(() => 0.5 - Math.random());
@@ -102,6 +33,7 @@ const getRandomTestimonials = (testimonials: Testimonial[], count: number): Test
 };
 
 export function TestimonialsSection() {
+  const defaultTestimonials = getTestimonials();
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [displayedTestimonials, setDisplayedTestimonials] = useState<Testimonial[]>([]);
   const [showAll, setShowAll] = useState(false);
@@ -283,7 +215,7 @@ export function TestimonialsSection() {
                         <FormLabel>Your Testimonial</FormLabel>
                         <FormControl>
                           <Textarea 
-                            placeholder="Share your experience working with Ismail..." 
+                            placeholder="Share your experience..." 
                             rows={4}
                             {...field} 
                           />

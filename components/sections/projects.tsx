@@ -14,118 +14,15 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import { ProjectDetails } from "@/components/project-details";
-
-// Project data interface
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  longDescription: string;
-  category: "web" | "mobile" | "design" | "other";
-  image: string;
-  tags: string[];
-  links: {
-    demo?: string;
-    github?: string;
-  };
-  features: string[];
-}
-
-// Hardcoded project data
-const projects: Project[] = [
-  {
-    id: "1",
-    title: "E-Commerce Dashboard",
-    description: "A responsive admin dashboard for managing e-commerce operations with real-time analytics and inventory management.",
-    longDescription: "A comprehensive e-commerce dashboard built with React and TypeScript, featuring real-time analytics, inventory management, order processing, and customer management. The dashboard includes interactive charts, data visualization, and a responsive design that works seamlessly across all devices.",
-    category: "web",
-    image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Chart.js"],
-    links: {
-      demo: "https://example.com/demo",
-      github: "https://github.com/johndoe/ecommerce-dashboard"
-    },
-    features: [
-      "Real-time sales analytics",
-      "Inventory management system",
-      "Order processing workflow",
-      "Customer management",
-      "Responsive design",
-      "Dark/light mode support"
-    ]
-  },
-  {
-    id: "2",
-    title: "Health & Fitness App",
-    description: "A mobile application for tracking workouts, nutrition, and health metrics with personalized recommendations.",
-    longDescription: "A comprehensive health and fitness mobile application that helps users track their workouts, monitor nutrition intake, and analyze health metrics. The app features personalized workout recommendations, meal planning, progress tracking, and social features to connect with other fitness enthusiasts.",
-    category: "mobile",
-    image: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800",
-    tags: ["React Native", "Node.js", "MongoDB", "Express"],
-    links: {
-      demo: "https://example.com/fitness-app",
-      github: "https://github.com/johndoe/fitness-app"
-    },
-    features: [
-      "Workout tracking and planning",
-      "Nutrition monitoring",
-      "Progress analytics",
-      "Social features",
-      "Personalized recommendations",
-      "Offline mode support"
-    ]
-  },
-  {
-    id: "3",
-    title: "Financial Portfolio Tracker",
-    description: "A web application for tracking investment portfolios with real-time market data and performance analytics.",
-    longDescription: "A sophisticated financial portfolio tracking application that provides real-time market data, performance analytics, and investment insights. Users can track multiple portfolios, analyze asset allocation, monitor market trends, and receive personalized investment recommendations based on their risk profile.",
-    category: "web",
-    image: "https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg?auto=compress&cs=tinysrgb&w=800",
-    tags: ["Next.js", "Python", "PostgreSQL", "D3.js"],
-    links: {
-      demo: "https://example.com/portfolio-tracker",
-      github: "https://github.com/johndoe/portfolio-tracker"
-    },
-    features: [
-      "Real-time market data",
-      "Portfolio performance analytics",
-      "Asset allocation visualization",
-      "Risk assessment tools",
-      "Investment recommendations",
-      "Multi-currency support"
-    ]
-  },
-  {
-    id: "4",
-    title: "Travel Photography Site",
-    description: "A stunning portfolio website showcasing travel photography with an immersive gallery experience.",
-    longDescription: "An elegant travel photography portfolio website featuring an immersive gallery experience, interactive maps showing photo locations, and a blog section for travel stories. The site includes advanced image optimization, lazy loading, and a responsive design that showcases photography in the best possible light.",
-    category: "design",
-    image: "https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=800",
-    tags: ["Vue.js", "Nuxt.js", "SCSS", "Strapi"],
-    links: {
-      demo: "https://example.com/travel-photography",
-      github: "https://github.com/johndoe/travel-photography"
-    },
-    features: [
-      "Immersive photo gallery",
-      "Interactive location maps",
-      "Travel blog integration",
-      "Image optimization",
-      "Responsive design",
-      "SEO optimization"
-    ]
-  }
-];
+import { getProjects, getProjectsByCategory, getPersonalInfo, type Project } from "@/lib/config";
 
 export function ProjectsSection() {
+  const projects = getProjects();
+  const personal = getPersonalInfo();
   const [activeTab, setActiveTab] = useState("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const filteredProjects = activeTab === "all" 
-    ? projects 
-    : projects.filter(project => project.category === activeTab);
+  const filteredProjects = getProjectsByCategory(activeTab);
 
   return (
     <section id="projects" className="py-20 md:py-24 bg-muted/30">
@@ -243,7 +140,7 @@ export function ProjectsSection() {
           className="text-center mt-8"
         >
           <Button asChild size="lg">
-            <a href="https://github.com/ismailelfakir" target="_blank" rel="noopener noreferrer">
+            <a href={personal.socialLinks.github} target="_blank" rel="noopener noreferrer">
               View All Projects on GitHub
             </a>
           </Button>

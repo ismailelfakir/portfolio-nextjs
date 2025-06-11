@@ -5,28 +5,30 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import { getSEOInfo } from '@/lib/config';
 
 const inter = Inter({ subsets: ['latin'] });
+const seoInfo = getSEOInfo();
 
 export const metadata: Metadata = {
-  title: 'Ismail El Fakir | Full Stack Developer Portfolio',
-  description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
-  keywords: ['full stack developer', 'web developer', 'portfolio', 'projects', 'React', 'Next.js', 'digital transformation', 'skills engineering'],
-  authors: [{ name: 'Ismail El Fakir' }],
-  creator: 'Ismail El Fakir',
+  title: seoInfo.title,
+  description: seoInfo.description,
+  keywords: seoInfo.keywords,
+  authors: [{ name: seoInfo.author }],
+  creator: seoInfo.author,
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://ismailelfakir-portfolio.com',
-    title: 'Ismail El Fakir | Full Stack Developer Portfolio',
-    description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
-    siteName: 'Ismail El Fakir Portfolio',
+    url: seoInfo.siteUrl,
+    title: seoInfo.title,
+    description: seoInfo.description,
+    siteName: `${seoInfo.author} Portfolio`,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ismail El Fakir | Full Stack Developer Portfolio',
-    description: 'Personal portfolio showcasing projects and skills in web development, digital transformation, and skills engineering',
-    creator: '@ismailelfakir',
+    title: seoInfo.title,
+    description: seoInfo.description,
+    creator: seoInfo.twitterHandle,
   },
 };
 

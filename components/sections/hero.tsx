@@ -2,10 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Link from "next/link";
+import { getPersonalInfo } from "@/lib/config";
 
 export function HeroSection() {
+  const personal = getPersonalInfo();
+
   const scrollToSection = (sectionId: string) => {
     const section = document.querySelector(sectionId);
     if (section) {
@@ -40,7 +43,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
               >
-                Hi, I'm Ismail El Fakir
+                Hi, I'm {personal.name}
                 <span className="text-primary">.</span>
               </motion.h1>
 
@@ -50,7 +53,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-xl font-medium text-muted-foreground sm:text-2xl"
               >
-                Full Stack Developer | Digital Transformation Specialist
+                {personal.title} | {personal.subtitle}
               </motion.h2>
             </div>
 
@@ -60,7 +63,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="max-w-[600px] text-muted-foreground md:text-xl"
             >
-              Specialized in Digital Transformation & Skills Engineering | Experienced in Web Development and Microservices
+              {personal.description}
             </motion.p>
 
             <motion.div
@@ -83,15 +86,20 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 1 }}
               className="flex items-center gap-4 pt-4"
             >
-              <Link href="https://github.com/ismailelfakir" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Link href={personal.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
-              <Link href="https://linkedin.com/in/ismailelfakir" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Link href={personal.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
-              <Link href="mailto:ielfakir49@gmail.com" aria-label="Email">
+              <Link href={personal.socialLinks.email} aria-label="Email">
                 <Mail className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors" />
               </Link>
+              {personal.socialLinks.twitter && (
+                <Link href={personal.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                  <Twitter className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors" />
+                </Link>
+              )}
             </motion.div>
           </motion.div>
 

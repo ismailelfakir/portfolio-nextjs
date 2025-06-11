@@ -4,64 +4,17 @@ import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
-interface Skill {
-  name: string;
-  level: number;
-  category: string;
-}
-
-// Hardcoded skills data
-const skills: Skill[] = [
-  // Frontend
-  { name: "React", level: 95, category: "frontend" },
-  { name: "Next.js", level: 90, category: "frontend" },
-  { name: "TypeScript", level: 88, category: "frontend" },
-  { name: "JavaScript", level: 95, category: "frontend" },
-  { name: "HTML5", level: 98, category: "frontend" },
-  { name: "CSS3", level: 92, category: "frontend" },
-  { name: "Tailwind CSS", level: 90, category: "frontend" },
-  { name: "Vue.js", level: 75, category: "frontend" },
-
-  // Backend
-  { name: "Node.js", level: 85, category: "backend" },
-  { name: "Express.js", level: 80, category: "backend" },
-  { name: "Python", level: 78, category: "backend" },
-  { name: "Java", level: 70, category: "backend" },
-  { name: "PHP", level: 65, category: "backend" },
-  { name: "REST APIs", level: 88, category: "backend" },
-  { name: "GraphQL", level: 72, category: "backend" },
-
-  // Tools & Software
-  { name: "Git", level: 90, category: "tools" },
-  { name: "Docker", level: 75, category: "tools" },
-  { name: "VS Code", level: 95, category: "tools" },
-  { name: "Figma", level: 80, category: "tools" },
-  { name: "Adobe XD", level: 70, category: "tools" },
-  { name: "Postman", level: 85, category: "tools" },
-
-  // Database & DevOps
-  { name: "MongoDB", level: 80, category: "database" },
-  { name: "PostgreSQL", level: 75, category: "database" },
-  { name: "MySQL", level: 78, category: "database" },
-  { name: "Firebase", level: 82, category: "database" },
-  { name: "AWS", level: 65, category: "database" },
-  { name: "Vercel", level: 88, category: "database" }
-];
+import { getSkills } from "@/lib/config";
 
 const categories = [
   { id: "frontend", label: "Frontend" },
   { id: "backend", label: "Backend" },
   { id: "tools", label: "Tools & Software" },
   { id: "database", label: "Database & DevOps" }
-];
+] as const;
 
 export function SkillsSection() {
-  // Group skills by category
-  const skillsByCategory = categories.reduce((acc, category) => {
-    acc[category.id] = skills.filter(skill => skill.category === category.id);
-    return acc;
-  }, {} as Record<string, Skill[]>);
+  const skills = getSkills();
 
   return (
     <section id="skills" className="py-20 md:py-24">
@@ -84,7 +37,7 @@ export function SkillsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Frontend and Backend with progress bars */}
           {categories.slice(0, 2).map((category, index) => {
-            const categorySkills = skillsByCategory[category.id];
+            const categorySkills = skills[category.id];
             
             return (
               <motion.div
@@ -129,7 +82,7 @@ export function SkillsSection() {
 
           {/* Tools & Software and Database sections */}
           {categories.slice(2).map((category, index) => {
-            const categorySkills = skillsByCategory[category.id];
+            const categorySkills = skills[category.id];
             
             return (
               <motion.div
