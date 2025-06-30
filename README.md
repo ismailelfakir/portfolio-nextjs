@@ -606,7 +606,7 @@ If you find this project helpful, please consider:
 
 ---
 
-**Built with ❤️ by Ismail El Fakir**
+**Built with by Ismail El Fakir**
 
 *Specialized in Digital Transformation & Skills Engineering | Full Stack Developer*
 
@@ -623,5 +623,3 @@ If you find this project helpful, please consider:
 - **Lighthouse Score**: 95+
 
 ---
-
-*Last Updated: January 2024*

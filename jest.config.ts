@@ -1,29 +1,28 @@
-import type { Config } from 'jest';
-import nextJest from 'next/jest.js';
+import type { Config } from "jest";
+import nextJest from "next/jest.js";
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files
-  dir: './',
+  dir: "./",
 });
 
 // Add any custom config to be passed to Jest
 const config: Config = {
-  coverageProvider: 'v8',
-  testEnvironment: 'jsdom',
+  coverageProvider: "v8",
+  testEnvironment: "jsdom",
   // Add more setup options before each test is run
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.tsx'],
-  moduleNameMapping: {
-    // Handle module aliases (this will be automatically configured for you based on your tsconfig.json paths)
-    '^@/(.*)$': '<rootDir>/$1',
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.tsx"],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   collectCoverageFrom: [
-    'components/**/*.{js,jsx,ts,tsx}',
-    'lib/**/*.{js,jsx,ts,tsx}',
-    'app/**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-    '!**/.next/**',
+    "components/**/*.{js,jsx,ts,tsx}",
+    "lib/**/*.{js,jsx,ts,tsx}",
+    "app/**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.next/**",
   ],
   coverageThreshold: {
     global: {
@@ -35,8 +34,8 @@ const config: Config = {
   },
   // Remove Babel transform configuration to let Next.js handle it
   transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
+    "/node_modules/",
+    "^.+\\.module\\.(css|sass|scss)$",
   ],
 };
 
