@@ -10,13 +10,13 @@ export function AboutSection() {
   const personal = getPersonalInfo();
 
   const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = personal.cv;
-    link.download = personal.cv.split('/').pop() || 'CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const link = document.createElement('a');
+  link.href = personal.cv;
+  link.download = personal.cv.split('/').pop() || 'CV.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
   return (
     <section id="about" className="py-20 md:py-24 bg-muted/50">
